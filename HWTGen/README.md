@@ -10,7 +10,7 @@ Python version```python==3.6```
 ## Tutorial
 ### Step1.Clone the project to local
 ```
-git clone https://github.com/AmerGong/NYPL-HTRModel-NYU-ITP2021summer.git
+git clone https://github.com/vg2134/Summer.git
 ```
 
 ### Step2. Set Up & Configure MySQL and Redis
