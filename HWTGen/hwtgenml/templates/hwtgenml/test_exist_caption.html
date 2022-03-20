@@ -1,0 +1,47 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function exists_alert() {
+            alert("Caption exists!")
+
+        }
+
+        function open_model_alert() {
+            alert("Please open model!")
+            window.location.href = "{% url 'open_model' %}"
+        }
+        {% if not model_choiced %}
+            open_model_alert()
+        {% endif %}
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">Test Transcription</p>
+            <p class="subtitle"> Test transcriptions.</p>
+            <form id="upload_form" method="POST" action="{% url 'test_model_exist' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="testCaption" class="form-label">Caption</label>
+                    <select class="form-control" id="testCaption" name="caption_name" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for caption in captions %}
+                            <option>{{ caption.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="button"
+                            onclick="window.location.href='{% url "test_caption" %}'">Choose Collection
+                    </button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

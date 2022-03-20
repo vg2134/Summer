@@ -1,0 +1,81 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block content %}
+    <div class="container">
+        <div style="margin-top:50px">
+            <div class="collection_card">
+                <p>New Collection Download Tasks</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Collection Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Create Time</th>
+                        <th scope="col">Update Time</th>
+                        <th scope="col">Estimated Completion Time(h)</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for collection in new_collections %}
+                        {% csrf_token %}
+                        <tr>
+                            <td width="125">{{ collection.name }}</td>
+                            <td width="125">{{ collection.user.username }}</td>
+                            <td width="125">{{ collection.create_time }}</td>
+                            <td width="125">{{ collection.update_time }}</td>
+                            <td width="125">{{ collection.estimated_time }}</td>
+                            {% if collection.estimated_time == '0' or collection.estimated_time == '0.0' %}
+                                <td width="125"><div class="status_span" style="background: gray;">Completed</div></td>
+                            {% else %}
+                                <td width="125"><div class="status_span">Processing</div></td>
+                            {% endif %}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="collection_card">
+                <p>Update Collection Download Tasks</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Collection Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Create Time</th>
+                        <th scope="col">Update Time</th>
+                        <th scope="col">Estimated Completion Time(h)</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for collection in update_collections %}
+                        {% csrf_token %}
+                        <tr>
+                            <td width="125">{{ collection.name }}</td>
+                            <td width="125">{{ collection.user.username }}</td>
+                            <td width="125">{{ collection.create_time }}</td>
+                            <td width="125">{{ collection.update_time }}</td>
+                            <td width="125">{{ collection.estimated_time }}</td>
+                            {% if collection.estimated_time == '0' or collection.estimated_time == '0.0'%}
+                                <td width="125"><div class="status_span" style="background: gray;">Completed</div></td>
+                            {% else %}
+                                <td width="125"><div class="status_span">Processing</div></td>
+                            {% endif %}
+
+
+
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

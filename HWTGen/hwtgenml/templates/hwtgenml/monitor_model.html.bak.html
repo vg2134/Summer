@@ -1,0 +1,31 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block content %}
+    <div class="container">
+        <div style="margin-top:50px">
+            <div class="collection_card">
+                <p>Models</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Model Name</th>
+                        <th scope="col">Last_retrain_caption</th>
+                        <th scope="col">Remaining Retrain Time(h)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for model in models %}
+                            <tr>
+                                <td width="125">{{ model.name }}</td>
+                                <td width="125">{{ model.last_retrain_caption }}</td>
+                                <td width="125">{{ model.remaining_retrain_time }}</td>
+                                </td>
+                            </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

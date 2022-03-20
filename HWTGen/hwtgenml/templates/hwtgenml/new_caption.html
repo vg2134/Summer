@@ -1,0 +1,43 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function exists_alert() {
+            alert("Caption exists!")
+        }
+        {% if caption_exists %}
+            exists_alert()
+        {% endif %}
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">New Caption</p>
+            <p class="subtitle">New Caption.</p>
+            <form id="upload_form" method="POST" action="{% url 'make_caption' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="newCaption" class="form-label">Collection</label>
+                    <select class="form-control" id="newCaption" name="collection_name" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for collection in collections %}
+                            <option>{{ collection.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="captionName" class="form-label">Caption Name</label>
+                    <input name="caption_name" class="form-control" type="text" id="captionName" value=""
+                           required>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

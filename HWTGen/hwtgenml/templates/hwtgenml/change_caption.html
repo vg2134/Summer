@@ -1,0 +1,197 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function getPage() {
+            var pageNum = $('#pageNum').val();
+            if (pageNum >= 1 && pageNum <= {{ Page.paginator.num_pages }}) {
+                location.assign("{% url 'make_exist_caption' %}?page=" + pageNum + "&caption_id={{ caption_id }}&threshold={{ threshold }}")
+            } else {
+                alert('Please input the correct page number')
+            }
+        }
+    </script>
+{% endblock script %}
+{% block content %}
+    <div class="container">
+        <div style="margin-top:50px">
+            <div class="collection_card">
+                <p>Transcriptions</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Image</th>
+                        <th scope="col">Confidence Level</th>
+                        <th scope="col">Recognized Text</th>
+                        <th scope="col">Saved Text</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for caption_image in Page.object_list %}
+                        <form method="post" action="{% url 'change_caption' %}">
+                            {% csrf_token %}
+                            <input style="display: none" name="threshold" value="{{ threshold }}">
+                            <input style="display: none" name="page" value="{{ Page.number }}">
+                            <tr>
+                                <td width="250"><input name="caption_image_id" value="{{ caption_image.id }}"
+                                                       hidden><img src="/{{ caption_image.image.file_path }}"
+                                                                   height="240" width="200"
+                                                                   onclick="window.open(this.src)"></td>
+                                <td width="250">{{ caption_image.confidence_level }}</td>
+                                <td width="250"><textarea name="content"
+                                                          rows="12" cols="20"
+                                                          style="width: 250px">{{ caption_image.recognized_text }}</textarea>
+                                </td>
+                                <td width="250">{{ caption_image.saved_text }}</td>
+                                <td width="125"><input type="submit" class="status_span" style="alignment: center"
+                                                       value="Save">
+                            </tr>
+                        </form>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <nav aria-label="Page navigation" style="float: right">
+                <ul class="pagination">
+                    <li>
+                        {% if Page.has_previous %}
+                            <a href="{% url 'make_exist_caption' %}?page={{ Page.previous_page_number }}&caption_id={{ caption_id }}&threshold={{ threshold }}"
+                               aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <!-- 形如 12345678910...13 -->
+                    <li>
+                        {% if ifEllipsis == 1 %}
+                            {% if Page.number >= 1 and Page.number <= 10 %}
+                                {% for i in range1 %}
+                                    {% if i >= 1 and i <= 10 %}
+                                        <li {% if Page.number == i %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                        </li>
+                                    {% elif i == 12 %}
+                                        <li {% if Page.number == Page.paginator.num_pages %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ Page.paginator.num_pages }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ Page.paginator.num_pages }}</a>
+                                        </li>
+                                    {% elif i == 11 %}
+                                        <li>
+                                            <a>...</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% elif Page.number == Page.paginator.num_pages %}
+                                {% for i in range1 %}
+                                    {% if i >= 1 and i <= 10 %}
+                                        <li {% if Page.number == i %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                        </li>
+                                    {% elif i == 12 %}
+                                        <li {% if Page.number == Page.paginator.num_pages %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ Page.paginator.num_pages }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ Page.paginator.num_pages }}</a>
+                                        </li>
+                                    {% elif i == 11 %}
+                                        <li>
+                                            <a>...</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% elif Page.number == 11 %}
+                                {% for i in range3 %}
+                                    {% if i >= 1 and i <= 10 %}
+                                        <li {% if Page.number == i %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                        </li>
+                                    {% elif i == 13 %}
+                                        <li {% if Page.number == Page.paginator.num_pages %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ Page.paginator.num_pages }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ Page.paginator.num_pages }}</a>
+                                        </li>
+                                    {% elif i == 11 %}
+                                        <li {% if Page.number == i %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a>...</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% elif Page.number == lastButOne %}
+                                {% for i in range3 %}
+                                    {% if i >= 1 and i <= 10 %}
+                                        <li {% if Page.number == i %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                        </li>
+                                    {% elif i == 13 %}
+                                        <li {% if Page.number == Page.paginator.num_pages %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ Page.paginator.num_pages }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ Page.paginator.num_pages }}</a>
+                                        </li>
+                                    {% elif i == 12 %}
+                                        <li {% if Page.number == lastButOne %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ lastButOne }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ lastButOne }}</a>
+                                        </li>
+                                    {% else %}
+                                        <li>
+                                            <a>...</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% elif Page.number > 11 and Page.number < lastButOne %}
+                                {% for i in range2 %}
+                                    {% if i >= 1 and i <= 10 %}
+                                        <li {% if Page.number == i %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                        </li>
+                                    {% elif i == 11 %}
+                                        <li>
+                                            <a>...</a>
+                                        </li>
+                                    {% elif i == 12 %}
+                                        <li class="active">
+                                            <a href="{% url 'make_exist_caption' %}?page={{ Page.number }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ Page.number }}</a>
+                                        </li>
+                                    {% elif i == 13 %}
+                                        <li>
+                                            <a>...</a>
+                                        </li>
+                                    {% elif i == 14 %}
+                                        <li {% if Page.number == Page.paginator.num_pages %} class="active" {% endif %}>
+                                            <a href="{% url 'make_exist_caption' %}?page={{ Page.paginator.num_pages }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ Page.paginator.num_pages }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% elif ifEllipsis == 0 %}
+                            {% for i in Page.paginator.page_range %}
+                                <li {% if Page.number == i %} class="active" {% endif %}>
+                                    <a href="{% url 'make_exist_caption' %}?page={{ i }}&caption_id={{ caption_id }}&threshold={{ threshold }}">{{ i }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </li>
+                    <li>
+                        {% if Page.has_next %}
+                            <a href="{% url 'make_exist_caption' %}?page={{ Page.next_page_number }}&caption_id={{ caption_id }}&threshold={{ threshold }}"
+                               aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        {% endif %}
+                    </li>
+                    <li>
+                        <a>total {{ Page.paginator.num_pages }} pages</a>
+                    </li>
+                    <li>
+                        go <input type="text" id="pageNum" size="1">
+                        <button type="button" class="btn btn-default btn-sm" onclick="getPage();">
+                            <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+
+        </div>
+    </div>
+{% endblock %}

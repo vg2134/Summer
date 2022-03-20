@@ -1,0 +1,11 @@
+scipy==1.5.2
+numpy==1.18.0
+Django==3.1.7
+django_phonenumber_field==5.2.0
+pyclipper==1.3.0
+django_autoslug==1.9.8
+editdistance==0.5.3
+django_crispy_forms==1.12.0
+preprocessing==0.1.13
+python-decouple==3.5
+PyYAML==5.4.1

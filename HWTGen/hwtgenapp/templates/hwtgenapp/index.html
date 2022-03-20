@@ -1,0 +1,60 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} ATGen {% endblock %}
+{% block index %}
+    {#<div id="homepage-img" class="mx-0"> #}
+    {#<!-- <div id="homepage-img" class="mx-0"> -->#}
+    {#  <!-- id="homepage-img" -->#}
+    {#  <img#}
+    {#    id="homepage-img"#}
+    {#    class="img-responsive d-block w-100"#}
+    {#    src="{% static 'images/screen_imgs/ATGenPic-1.jpg' %}"#}
+    {#    alt="ATGen Homepage"#}
+    {#  />#}
+    {#</div> #}
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+
+        <!-- 指示符 -->
+        <ul class="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+            <li data-target="#carousel" data-slide-to="4"></li>
+            <li data-target="#carousel" data-slide-to="5"></li>
+        </ul>
+
+        
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="{% static 'images/screen_imgs/nypl-rose.jpg' %}"
+                     style="width: 100%;height: 650px;">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/screen_imgs/nypl.jpg' %}"
+                     style="width: 100%;height: 650px;">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/screen_imgs/nypl-.jpeg' %}"
+                     style="width: 100%;height: 650px;">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/screen_imgs/get_a_digital_library_card_today_cr.jpeg' %}"
+                     style="width: 100%;height: 650px;">
+            </div>
+            <div class="carousel-item">
+                <img src="{% static 'images/screen_imgs/710-iStock-1219810008-tarabird-18-April-2020-NYPL-ftw.jpeg' %}"
+                     style="width: 100%;height: 650px;">
+            </div>
+        </div>
+
+        <!-- 左右切换按钮 -->
+        <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#carousel" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+
+    </div>
+{% endblock %}
+

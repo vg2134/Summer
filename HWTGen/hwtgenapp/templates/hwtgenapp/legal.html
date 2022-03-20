@@ -1,0 +1,55 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block content %}
+<br /><br />
+<div class="container mt-3 mb-5 mx-0" role="main">
+	<div id="tabdropdown">
+		<ul class="nav nav-tabs">
+			{% for topicdetail in topicdetails %}
+				{% if forloop.first %}
+					<li class="nav-item">
+		    			<a class="nav-link active" style="text-decoration: none;" href="#{{ topicdetail.title | cut:" " | cut:"&" | cut:"'" | cut:";" }}" onmouseover="gototab(this);" onclick="gototab(this);">{{ topicdetail.title | safe }}</a>
+		  			</li>
+				{% else %}
+					<li class="nav-item">
+		    			<a class="nav-link" style="text-decoration: none;" href="#{{ topicdetail.title | cut:" " | cut:"&" | cut:"'" | cut:";" }}" onmouseover="gototab(this);" onclick="gototab(this);">{{ topicdetail.title | safe }}</a>
+		  			</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+	<div class="tab-content mt-3 mb-0">
+		{% for topicdetail in topicdetails %}
+			{% if forloop.first %}
+				<div id="{{ topicdetail.title | cut:" " | cut:"&" | cut:"'" | cut:";" }}" class="tab-pane fade show active" style="visibility: visible;">
+			{% else %}
+				<div id="{{ topicdetail.title | cut:" " | cut:"&" | cut:"'" | cut:";" }}" class="tab-pane fade">
+			{% endif %}
+				<div class="myscrolltabdiv container">
+					<div class="mt-2">
+						<h5 id="topictitle" class="pt-2">{{ topicdetail.title | safe }}</h5>
+                       	<div>
+                       		<p>{{ topicdetail.content | safe | linebreaks }}</p>
+                       	</div>
+					</div>
+                   	</div>
+                  </div>
+		{% endfor %}
+	</div> <!-- tab-content -->
+</div> <!-- container -->
+
+{% endblock content %}
+{% block jsfiles %}
+<script type="text/javascript">
+    function gototab(obj) {
+    	var url= obj.href; 
+       var hash = url.substring(url.indexOf("#")+1);
+
+	$('.nav-tabs a.active').removeClass('active');
+	$('.tab-content div.active').removeClass('active');
+       if (hash) {
+       	$('.nav-tabs a[href=\\#'+hash+']').tab('show');
+       }
+    }
+</script>
+{% endblock jsfiles %}

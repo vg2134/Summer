@@ -1,0 +1,36 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function retrain_alert() {
+            alert("You will retrain the model!")
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">Retrain Model</p>
+            <p class="subtitle">Choose one transcription and retrain the model</p>
+            <form id="upload_form" method="POST" action="{% url 'choose_caption' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="retrainModel" class="form-label">Transcriptions to retrain</label>
+                    <select class="form-control" name="caption_name" id="retrainModel" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for caption in captions %}
+                            <option>{{ caption.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="submit" onclick="retrain_alert()">retrain Transcriptions</button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

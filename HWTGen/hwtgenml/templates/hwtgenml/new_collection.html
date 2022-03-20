@@ -1,0 +1,46 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function exists_alert() {
+            alert("Collection exists!")
+        }
+        {% if exists %}
+            exists_alert()
+        {% endif %}
+    </script>
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <!-- New Collection -->
+        <div class="form_card">
+            <p class="title">New Collection</p>
+            <p class="subtitle">text text text </p>
+            <form id="upload_form" method="POST" action="{% url 'upload_images' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="collectionName" class="form-label">Collection Name</label>
+                    <input name="collection_name" class="form-control" type="text" id="collectionName" value=""
+                           required>
+                </div>
+                <div>
+                    <label for="collectionDescription" class="form-label">Collection Description</label>
+                    <input name="collection_description" class="form-control" type="text" id="collectionDescription" value=""
+                           required>
+                </div>
+                <div>
+                    <label for="collectionFolder" class="form-label">Collection Folder</label>
+                    <input type="file" name="collection_images" class="form-control file" id="collectionFolder"
+                           webkitdirectory directory required>
+                </div>
+                <div>
+                    <button class="btn btn-primary">Confirm</button>
+                    <button class="btn btn-primary" type="button" onclick="window.location.href='{% url "choose_collection_online" %}'">Choose Online</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,92 @@
+.form_card {
+  justify-content: center;
+  align-items: center;
+  margin: 80px auto;
+  padding: 15px;
+  width: 350px;
+  box-shadow: 0 0 10px rgba(61, 59, 55, 0.8);
+  border-radius: 1%
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bolder;
+  line-height: 2;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #494848;
+  font-weight: 500;
+}
+
+.form_card>form>div {
+  margin-top: 10px;
+}
+
+.form_card>form .form-label {
+  font-weight: bold;
+}
+
+.form_card>form .file {
+  line-height: 1;
+}
+
+.form_card>form .btn-primary {
+  border: none;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.collection_card {
+  justify-content: center;
+  align-items: center;
+  margin: 10px auto;
+  padding: 15px;
+  width: 68vw;
+  border: solid 1px #c0c0c08f;
+  border-radius: 3px;
+  box-shadow: 0 0 1px rgba(61, 59, 55, 0.8);
+}
+
+.collection_card>p{
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.status_span {
+  background-color: #3daa1c;
+  border-radius: 3px;
+  padding: 2px 5px;
+  font-size: 8px;
+  color: white;
+  font-weight: bold;
+}
+
+.captions_card{
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto;
+  width: 650px;
+  border: solid 1px #494848ee;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(61, 59, 55, 0.8);
+}
+
+.header{
+  text-align: center;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bolder;
+  line-height: 1;
+  border-bottom: solid 1px #494848ee;
+  box-shadow: 0 0 3px rgba(61, 59, 55, 0.8);
+  background-color: #dadada44;
+}
+
+.img{
+  border: solid 2px #c0c0c0ee;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,39 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function exists_alert() {
+            alert("Caption exists!")
+        }
+        {% if caption_exists %}
+            exists_alert()
+        {% endif %}
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">Choose Confidence Level</p>
+            <p class="subtitle">Please choose the confidence level range of transcritions you would like to view.</p>
+            <form id="upload_form" method="POST" action="{% url 'make_exist_caption' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <input style="display: none" name="caption_id" value="{{ caption.id }}">
+                    <label for="updateCaption" class="form-label">Caption</label>
+                    <select class="form-control" id="updateCaption" name="threshold" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for threshold in thresholds %}
+                            <option value="{{ threshold }}">{{ threshold }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

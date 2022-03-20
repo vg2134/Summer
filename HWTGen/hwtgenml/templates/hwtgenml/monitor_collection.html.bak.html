@@ -1,0 +1,52 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block content %}
+    <div class="container">
+        <div style="margin-top:50px">
+            <div class="collection_card">
+                <p>Collections</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Collection Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Create Time</th>
+                        <th scope="col">Update Time</th>
+                        <th scope="col">Image Num</th>
+                        <th scope="col">Option</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for collection in collections %}
+                        <form method="post" action="{% url 'copy_collection' %}">
+                            {% csrf_token %}
+                            <tr>
+                                <td width="125"><input name="collection_name"
+                                                       style="border: none;background: transparent" readonly
+                                                       value="{{ collection.name }}" onfocus=this.blur()></td>
+                                <td width="125"><input name="user_name" style="border: none;background: transparent" readonly
+                                                        value="{{ collection.user.username }}" onfocus=this.blur()></td>
+                                <td width="125">
+                                    {{ collection.description }}
+                                </td>
+                                <td width="125">{{ collection.create_time }}</td>
+                                <td width="125">{{ collection.update_time }}</td>
+                                <td width="125">{{ collection.images.count }}</td>
+                                {% if collection.user.username == login_user %}
+                                    <td width="125"><input type="submit" class="status_span" style="background: gray"
+                                                           disabled value="Copy">
+                                        {% else %}
+                                    <td width="125"><input type="submit" class="status_span" value="Copy">
+                                {% endif %}
+                                </td>
+                            </tr>
+                        </form>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

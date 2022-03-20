@@ -1,0 +1,35 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">Update Collection</p>
+            <p class="subtitle">Text text text text text text text text text text text text text text text text text
+                text
+                text text text text text text text text text ...</p>
+            <form id="upload_form" method="POST" action="{% url 'update_images' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="updateCollection" class="form-label">Collection to update</label>
+                    <select class="form-control" name="collection_name" id="updateCollection" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for collection in collections %}
+                            <option>{{ collection.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="collectionFolder" class="form-label">Collection Folder</label>
+                    <input type="file" name="collection_images" class="form-control file" id="collectionFolder" webkitdirectory directory
+                           required>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Update Collection</button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

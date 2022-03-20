@@ -1,0 +1,124 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function processing_alert() {
+            alert("model is processing!")
+        }
+        {% if processing %}
+            processing_alert()
+        {% endif %}
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div style="margin-top:50px">
+            <div class="collection_card">
+                <p>Boostrap Model Tasks</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Collection Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Create Time</th>
+                        <th scope="col">Update Time</th>
+                        <th scope="col">Estimated Completion Time(h)</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for model in boostrap_models %}
+                        <tr>
+                            <td width="125">{{ model.now_collection.name }}</td>
+                            <td width="125">{{ model.user.username }}</td>
+                            <td width="125">{{ model.create_time }}</td>
+                            <td width="125">{{ model.update_time }}</td>
+                            <td width="125">{{ model.estimated_time }}</td>
+                            {% if model.estimated_time == '0' or model.estimated_time == '0.0' %}
+                                <td width="125">
+                                    <div class="status_span" style="background: gray;" >Completed</div>
+                                </td>
+                            {% else %}
+                                <td width="125">
+                                    <div class="status_span">Processing</div>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="collection_card">
+                <p>Open Model Tasks</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Collection Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Create Time</th>
+                        <th scope="col">Update Time</th>
+                        <th scope="col">Estimated Completion Time(h)</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for model in open_models %}
+                        <tr>
+                            <td width="125">{{ model.now_collection.name }}</td>
+                            <td width="125">{{ model.user.username }}</td>
+                            <td width="125">{{ model.create_time }}</td>
+                            <td width="125">{{ model.update_time }}</td>
+                            <td width="125">{{ model.estimated_time }}</td>
+                            {% if model.estimated_time == '0' or model.estimated_time == '0.0' %}
+                                <td width="125">
+                                    <div class="status_span" style="background: gray;">Completed</div>
+                                </td>
+                            {% else %}
+                                <td width="125">
+                                    <div class="status_span">Processing</div>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="collection_card">
+                <p>Retrain Model Tasks</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Collection Name</th>
+                        <th scope="col">User</th>
+                        <th scope="col">Create Time</th>
+                        <th scope="col">Update Time</th>
+                        <th scope="col">Estimated Completion Time(h)</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for model in retrain_models %}
+                        <tr>
+                            <td width="125">{{ model.now_collection.name }}</td>
+                            <td width="125">{{ model.user.username }}</td>
+                            <td width="125">{{ model.create_time }}</td>
+                            <td width="125">{{ model.update_time }}</td>
+                            <td width="125">{{ model.estimated_time }}</td>
+                            {% if model.estimated_time == '0.0' or model.estimated_time == '0' %}
+                                <td width="125">
+                                    <div class="status_span" style="background: gray;">Completed</div>
+                                </td>
+                            {% else %}
+                                <td width="125">
+                                    <div class="status_span">Processing</div>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block script %}
+    <script type="text/javascript">
+        function exists_alert() {
+            alert("Caption exists!")
+        }
+        {% if caption_exists %}
+            exists_alert()
+        {% endif %}
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">Update Transcription</p>
+            <p class="subtitle">Choose one transcription, view the results and edit.</p>
+            <form id="upload_form" method="POST" action="{% url 'update_caption_threshold' %}"
+                  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <label for="updateCaption" class="form-label">Transcription</label>
+                    <select class="form-control" id="updateCaption" name="caption_name" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for caption in captions %}
+                            <option>{{ caption.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

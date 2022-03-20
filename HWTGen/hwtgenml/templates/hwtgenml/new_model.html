@@ -1,0 +1,27 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="form_card">
+            <p class="title">New Model</p>
+            <p class="subtitle">Select a collection to new a model for.</p>
+            <form method="post" action="{% url 'choose_boostrap_model' %}">
+                {% csrf_token %}
+                <div>
+                    <label for="openModel" class="form-label">Collection</label>
+                    <select class="form-control" id="openModel" name="collection_name" required>
+                        <option selected disabled value="">Choose...</option>
+                        {% for collection in user_collections %}
+                            <option>{{ collection.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button class="btn btn-primary" type="submit">Open Model</button>
+                    <button class="btn btn-primary" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

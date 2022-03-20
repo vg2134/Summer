@@ -1,0 +1,13 @@
+{% extends "hwtgenapp/base.html" %}
+{% load static %}
+{% block title %} HWTGen {% endblock %}
+{% block content %}
+<div id="homepage-img" class="mx-0"> 
+  <img
+    id="homepage-img"
+    class="img-responsive d-block w-100"
+    src="{% static '{{page_img}}' %}"
+    alt="New York Public Library"
+  />
+</div> 
+{% endblock %}

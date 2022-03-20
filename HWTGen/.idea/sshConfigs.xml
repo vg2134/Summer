@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig host="ec2-18-216-230-194.us-east-2.compute.amazonaws.com" id="cb970b67-5e3c-4fc5-91fa-9c8d748eb78f" keyPath="$USER_HOME$/Desktop/hwtgen.pem" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" />
+      <sshConfig authType="PASSWORD" host="139.224.238.216" id="14798324-90ba-4eeb-ba97-d734229b30cb" port="22" nameFormat="DESCRIPTIVE" username="root" />
+    </configs>
+  </component>
+</project>
